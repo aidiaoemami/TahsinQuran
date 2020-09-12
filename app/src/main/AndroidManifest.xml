@@ -9,6 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".TentangActivity"
+            android:label="Tentang"
+            />
+        <activity android:name=".KuisActivity"
+            android:label="Kuis"/>
+        <activity android:name=".TajwidActivity"
+            android:label="Tajwid"/>
+        <activity android:name=".TahsinActivity"
+            android:label="Tahsin"/>
+        <activity android:name=".TambahDataActivity" />
+        <activity android:name=".ResultActivity" />
         <activity
             android:name=".SplashscreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
@@ -18,9 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
