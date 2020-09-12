@@ -23,7 +23,7 @@ public class ResultActivity extends AppCompatActivity {
 //    SQLiteDatabase db;
     DataHelper db;
     private ArrayList<String> teks, key;
-    private ArrayList<Integer> distance;
+    private ArrayList<Integer> valuedistance;
     private ArrayList<Integer> cost;
     List<Tahsin> key_lafadz;
 
@@ -45,31 +45,42 @@ public class ResultActivity extends AppCompatActivity {
 //        db = helper.getReadableDatabase();
 
         key = new ArrayList<>();
-        distance = new ArrayList<>();
+        valuedistance = new ArrayList<>();
         db = new DataHelper(this);
         Cursor cursor = db.allDataTahsin();
         StringBuilder stringBuilder = new StringBuilder();
+
+        if (cursor.getCount()==0){
+            textView.setText("null");
+        }
+        else{
+            while (cursor.moveToNext()){
+                key.add(cursor.getString(3));
+                valuedistance.add(distance(pattern,key.get(cursor.getPosition())));
+//                stringBuilder.append("jarak : "+valuedistance.get(cursor.getPosition())+" Key : "
+//                +key.get(cursor.getPosition())+"\n");
+//                stringBuilder.append(cursor.getCount());
+            }
+        }
+
+        int min = valuedistance.get(0);
+        int max = valuedistance.get(0);
+        int minIndex = 0, maxIndex =0;
+        for (int x = 1 ; x<valuedistance.size();x++){
+            if (valuedistance.get(x)<min){
+                min = valuedistance.get(x);
+                minIndex = x;
+            }
+        }
+        textView.setText(key.get(minIndex));
+
+
 
         String jumlah = Integer.toString(cursor.getCount());
 
         String coloumindex = Integer.toString(cursor.getColumnIndex("hukum"));
 
-//        textView.setText(Integer.toString(distance("rosettacode","raisethysword")));
 
-
-        if (cursor.getCount()==0){
-
-        }
-        else{
-            while (cursor.moveToNext()){
-                key.add(cursor.getPosition(), cursor.getString(3));
-//                distance.add(cursor.getPosition(), 2);
-//                stringBuilder.append("ID : "+cursor.getPosition()+"\nHukum : "+key.get(cursor.getPosition())+"\n");
-//                stringBuilder.append(cursor.getCount());
-            }
-
-            textView.setText(Integer.toString(distance("tes", "mambaatsana")));
-        }
 
         reloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
