@@ -31,6 +31,17 @@ public class DataModel {
         return tahsin;
     }
 
+    public Hukum selectHukumByID(int ID){
+        Hukum hukum = null;
+        String query = "select * from " +TABLE_HUKUM+" where id = "+ID+";";
+        Cursor cursor = db.rawQuery(query, null);
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String hukumBacaan = cursor.getString(1);
+            hukum = new Hukum(id, hukumBacaan);
+        }
+        return hukum;
+    }
 
     public List<Tahsin> getAllTahsin(){
         List <Tahsin> data = new ArrayList<Tahsin>();

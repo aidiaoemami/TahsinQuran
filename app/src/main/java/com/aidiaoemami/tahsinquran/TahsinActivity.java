@@ -4,6 +4,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -63,6 +64,10 @@ public class TahsinActivity extends AppCompatActivity {
         int id_tahsin = lafadzh.getId();
         final String idtahsin = String.valueOf(id_tahsin);
         textlafadz.setText(textLafadzh);
+        SharedPreferences sharedPref = getSharedPreferences("myKey", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("id_tahsin", id_tahsin);
+        editor.apply();
 
         voiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,6 +81,7 @@ public class TahsinActivity extends AppCompatActivity {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Bacakan sesuai lafadz");
 //        i.putExtra(RecognizerIntent.EXTRA_PROMPT, value);
 
         try {

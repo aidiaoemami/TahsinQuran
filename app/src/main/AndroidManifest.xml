@@ -19,7 +19,8 @@
         <activity android:name=".TahsinActivity"
             android:label="Tahsin"/>
         <activity android:name=".TambahDataActivity" />
-        <activity android:name=".ResultActivity" />
+        <activity android:name=".ResultActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
             android:name=".SplashscreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">
