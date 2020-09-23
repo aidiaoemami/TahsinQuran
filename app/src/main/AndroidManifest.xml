@@ -12,15 +12,18 @@
         <activity android:name=".TentangActivity"
             android:label="Tentang"
             />
-        <activity android:name=".KuisActivity"
-            android:label="Kuis"/>
+        <activity android:name=".MateriActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".TajwidActivity"
-            android:label="Tajwid"/>
+            android:label="Tajwid"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".TahsinActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:label="Tahsin"/>
-        <activity android:name=".TambahDataActivity" />
+        <activity android:name=".ResultTajwidActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".ResultActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".SplashscreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

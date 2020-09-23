@@ -1,43 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_green"
-    android:padding="20dp"
+    android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
     tools:context=".TahsinActivity">
 
-    <TextView
-        android:id="@+id/lafadz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Lafadz"
-        android:textColor="#fff"
-        android:textSize="30sp"
-        android:layout_centerHorizontal="true"
-        />
-    <TextView
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/voiceBtn"
-        android:layout_margin="10dp"
-        android:textColor="#fff"
-        android:layout_marginBottom="10dp"
-        android:textAlignment="center"
-        android:text="Tekan dan Bacakan \nsesuai teks diatas"
-        android:textSize="24sp" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="130dp">
 
-    <ImageButton
-        android:id="@+id/voiceBtn"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="@null"
-        android:src="@drawable/mic3"
-        android:scaleType="fitCenter"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="20dp"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tahsin"
+                android:textColor="@color/white"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Mengoreksi Bacaan "
+                android:textColor="#fff"
+                android:textSize="15sp"
+                android:layout_marginLeft="20dp"
+                />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/mother"
+            android:scaleType="fitCenter"
+            android:scaleY="1.7"
+            android:scaleX="1.7"/>
+
+    </LinearLayout>
 
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_greendark"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/lafadz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lafadz"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            />
+
+        <ImageButton
+            android:id="@+id/voiceBtn"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@null"
+            android:src="@drawable/mic3"
+            android:scaleType="fitCenter"
+            android:layout_marginTop="200dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/voiceBtn"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:text="Tekan dan Bacakan \nsesuai teks diatas"
+            android:textSize="24sp"
+            />
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

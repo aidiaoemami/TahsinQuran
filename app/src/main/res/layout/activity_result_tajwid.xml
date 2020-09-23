@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ResultActivity"
+    tools:context=".ResultTajwidActivity"
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
     <TextView
-        android:id="@+id/textTv"
+        android:id="@id/tvTajwid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Text"
+        android:text="Hukum Bacaan: "
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -38,16 +38,6 @@
         android:background="@drawable/bg_menu"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_marginTop="30dp"
-            android:layout_marginBottom="10dp"
-            android:id="@+id/lafadz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="text"
-            android:textSize="30sp"
-            android:textColor="@color/colorPrimary"
-            android:textAlignment="center"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -57,10 +47,11 @@
             android:background="@color/colorPrimary"
             android:textColor="@color/white"
             android:textSize="16sp"
+            android:layout_marginTop="30dp"
             />
 
         <TextView
-            android:id="@+id/pattern"
+            android:id="@+id/tvPattern"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="text"
@@ -82,7 +73,7 @@
             />
 
         <TextView
-            android:id="@+id/key"
+            android:id="@+id/tvKey"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="text"
@@ -105,10 +96,10 @@
             />
 
         <TextView
-            android:id="@+id/tvTajwid"
+            android:id="@+id/tvSebab"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="text"
+            android:text="Nun mati/Tanwin bertemu dengan huruf "
             android:padding="10dp"
             android:textSize="16sp"
             android:background="@color/bluelight"
@@ -127,12 +118,11 @@
         android:layout_alignParentBottom="true">
 
         <Button
-            android:id="@+id/reloadBtn"
+            android:id="@+id/reloadBtnTajwid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Ulangi Tahsin"
-            android:textStyle="bold"
+            android:text="Ulangi Tajwid"
             android:background="@drawable/bg_primary"
             android:layout_weight="1">
         </Button>
@@ -140,15 +130,15 @@
     </LinearLayout>
 
 
-<!--    <ImageButton-->
-<!--        android:id="@+id/reloadBtn"-->
-<!--        android:scaleType="fitCenter"-->
-<!--        android:layout_width="50dp"-->
-<!--        android:layout_height="50dp"-->
-<!--        android:background="@null"-->
-<!--        android:src="@drawable/reload"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_centerVertical="true"-->
-<!--        android:layout_centerHorizontal="true"/>-->
+    <!--    <ImageButton-->
+    <!--        android:id="@+id/reloadBtn"-->
+    <!--        android:scaleType="fitCenter"-->
+    <!--        android:layout_width="50dp"-->
+    <!--        android:layout_height="50dp"-->
+    <!--        android:background="@null"-->
+    <!--        android:src="@drawable/reload"-->
+    <!--        android:layout_alignParentBottom="true"-->
+    <!--        android:layout_centerVertical="true"-->
+    <!--        android:layout_centerHorizontal="true"/>-->
 
 </LinearLayout>

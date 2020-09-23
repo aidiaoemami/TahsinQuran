@@ -4,12 +4,12 @@ public class Tajwid {
     private int id, hukum;
     private String huruf, transliterasi, transkripsi;
 
-    public Tajwid(int id, int hukum, String huruf, String transliterasi, String transkripsi) {
+    public Tajwid(int id, String huruf, String transliterasi, String transkripsi, int hukum) {
         this.id = id;
-        this.hukum = hukum;
         this.huruf = huruf;
         this.transliterasi = transliterasi;
         this.transkripsi = transkripsi;
+        this.hukum = hukum;
     }
 
     public int getId() {

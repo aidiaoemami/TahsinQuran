@@ -72,16 +72,16 @@ public class TahsinActivity extends AppCompatActivity {
         voiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                speak();
+                speak(textLafadzh);
             }
         });
     }
 
-    private void speak() {
+    private void speak(String textlafadz) {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
-        i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Bacakan sesuai lafadz");
+//        i.putExtra(RecognizerIntent.EXTRA_PROMPT, textlafadz);
 //        i.putExtra(RecognizerIntent.EXTRA_PROMPT, value);
 
         try {
@@ -102,8 +102,10 @@ public class TahsinActivity extends AppCompatActivity {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                     Intent i = new Intent(TahsinActivity.this, ResultActivity.class);
                     i.putExtra("text", result);
-                    startActivity(i);
                     //textView.setText(result.get(0));
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(i);
+                    TahsinActivity.this.finish();
                 }
                 break;
             }

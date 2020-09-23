@@ -1,14 +1,14 @@
 package com.aidiaoemami.tahsinquran;
 
 public class Tahsin {
-    private int id, hukum;
-    private String lafadz, transkripsi;
+    private int id;
+    private String lafadz, transkripsi, transliterasi;
 
-    public Tahsin(int id, int hukum, String lafadz, String transkripsi) {
+    public Tahsin(int id, String transliterasi, String lafadz, String transkripsi) {
         this.id = id;
-        this.hukum = hukum;
         this.lafadz = lafadz;
         this.transkripsi = transkripsi;
+        this.transliterasi = transliterasi;
     }
 
     public int getId() {
@@ -17,14 +17,6 @@ public class Tahsin {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getHukum() {
-        return hukum;
-    }
-
-    public void setHukum(int hukum) {
-        this.hukum = hukum;
     }
 
     public String getLafadz() {
@@ -41,5 +33,13 @@ public class Tahsin {
 
     public void setTranskripsi(String transkripsi) {
         this.transkripsi = transkripsi;
+    }
+
+    public String getTransliterasi() {
+        return transliterasi;
+    }
+
+    public void setTransliterasi(String transliterasi) {
+        this.transliterasi = transliterasi;
     }
 }

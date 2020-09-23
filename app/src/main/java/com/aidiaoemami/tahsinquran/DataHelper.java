@@ -65,4 +65,10 @@ public class DataHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("select * from tahsin", null);
         return cursor;
     }
+
+    public Cursor allDataTajwid(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select * from tajwid", null);
+        return cursor;
+    }
 }

@@ -2,6 +2,7 @@ package com.aidiaoemami.tahsinquran;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 public class DataModel {
 
     SQLiteDatabase db;
+    SQLiteOpenHelper helper;
     String TABLE_TAHSIN = "tahsin";
     String TABLE_TAJWID = "tajwid";
     String TABLE_HUKUM = "hukum";
@@ -23,10 +25,10 @@ public class DataModel {
         Cursor cursor = db.rawQuery(query, null);
         while (cursor.moveToNext()){
             int id = cursor.getInt(0);
-            int hukum = cursor.getInt(1);
+            String transliterasi = cursor.getString(1);
             String lafadz = cursor.getString(2);
             String transkripsi = cursor.getString(3);
-            tahsin = new Tahsin(id, hukum, lafadz, transkripsi);
+            tahsin = new Tahsin(id, transliterasi, lafadz, transkripsi);
         }
         return tahsin;
     }
@@ -43,20 +45,19 @@ public class DataModel {
         return hukum;
     }
 
-    public List<Tahsin> getAllTahsin(){
-        List <Tahsin> data = new ArrayList<Tahsin>();
-        String query = "select * from tahsin";
+    public Tajwid selectAllTajwidByID(int ID){
+        Tajwid tajwid = null;
+        String query = "select * from " +TABLE_TAJWID+" where id = "+ID+";";
         Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()){
-            do {
-                Tahsin data_tahsin = new Tahsin(cursor.getInt(0),
-                        cursor.getInt(1),
-                        cursor.getString(2),
-                        cursor.getString(3));
-                data.add(data_tahsin);
-            }while (cursor.moveToNext());
+        while (cursor.moveToNext()){
+            int id = cursor.getInt(0);
+            String huruf = cursor.getString(1);
+            String transliterasi = cursor.getString(2);
+            String transkripsi = cursor.getString(3);
+            int hukum = cursor.getInt(4);
+            tajwid = new Tajwid(id, huruf, transliterasi, transkripsi, hukum);
         }
-        cursor.close();
-        return data;
+        return tajwid;
     }
+
 }
