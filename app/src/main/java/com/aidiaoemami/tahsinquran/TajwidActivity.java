@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.Locale;
 public class TajwidActivity extends AppCompatActivity {
 
     ImageButton voiceBtn;
+    ImageView btnBack;
     private static final int REQUEST_CODE_SPEECH_INPUT = 1000;
 
     @Override
@@ -24,10 +26,17 @@ public class TajwidActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tajwid);
         voiceBtn = findViewById(R.id.voiceTajwid);
+        btnBack = findViewById(R.id.btnBack);
         voiceBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 speak();
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

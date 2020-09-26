@@ -8,17 +8,20 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.aidiaoemami.tahsinquran.ResultActivity.BoyerMoore;
+
 import static com.aidiaoemami.tahsinquran.ResultActivity.distance;
+import static com.aidiaoemami.tahsinquran.ResultActivity.stemming;
 
 public class ResultTajwidActivity extends AppCompatActivity {
 
     Button btnReload;
     TextView tvTajwid, tvPattern, tvKey, tvHuruf;
+    ImageView btnClose;
     private ArrayList<String> teks, key;
     ArrayList<Integer> valuedistance = null;
     SQLiteOpenHelper helper;
@@ -31,75 +34,60 @@ public class ResultTajwidActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result_tajwid);
+        db = new DataHelper(this);
+        helper = new DataHelper(getApplicationContext());
+        dataModel = new DataModel(helper.getReadableDatabase());
 
         btnReload = findViewById(R.id.reloadBtnTajwid);
         tvTajwid = findViewById(R.id.tvTajwid);
         tvPattern = findViewById(R.id.tvPattern);
         tvKey = findViewById(R.id.tvKey);
         tvHuruf = findViewById(R.id.tvSebab);
+        btnClose = findViewById(R.id.btnClose);
 
         Intent i = getIntent();
         teks = i.getStringArrayListExtra("text");
         String pattern = teks.get(0).toLowerCase().replaceAll("[^a-z]", "");
-        String pattern2 = teks.get(0).toLowerCase().replaceAll("[^a-z]", "");
-
-        //stemming
-        String patternTajwid;
-        char n = 'n';
-        char m;
-        int indexN=0, noWord=0;
-        int length = pattern.length();
-        for (int x = 0; x<length;x++){
-            m = pattern.charAt(x);
-            if (m == n && x>0){
-                indexN = x-1;
-                break;
-            }
-            noWord=0;
+        String newPattern = stemming(pattern);
+        if(newPattern.equals("x")){
+            tvTajwid.setText(newPattern);
         }
-        if (length-indexN > 4 && indexN>0)
-            patternTajwid = pattern.substring(indexN, indexN+4);
-        else if (noWord==0)
-            patternTajwid = pattern;
-        else
-            patternTajwid = pattern.substring(indexN, length);
 
-        db = new DataHelper(this);
-        helper = new DataHelper(getApplicationContext());
-        dataModel = new DataModel(helper.getReadableDatabase());
+        else {
+            StringBuilder stringBuilder = new StringBuilder();
+            key = new ArrayList<>();
+            valuedistance = new ArrayList<>();
+            Cursor cursor = db.allDataTajwid();
 
-        StringBuilder stringBuilder = new StringBuilder();
-        key = new ArrayList<>();
-        valuedistance = new ArrayList<>();
-        Cursor cursor = db.allDataTajwid();
-
-        while (cursor.moveToNext()){
-            key.add(cursor.getString(2));
-            valuedistance.add(distance(patternTajwid,key.get(cursor.getPosition())));
+            while (cursor.moveToNext()){
+                key.add(cursor.getString(2));
+                valuedistance.add(distance(newPattern,key.get(cursor.getPosition())));
                 stringBuilder.append("jarak : "+valuedistance.get(cursor.getPosition())+" Key : "
-                +key.get(cursor.getPosition())+"\n");
+                        +key.get(cursor.getPosition())+"\n");
 //                stringBuilder.append(cursor.getCount());
-        }
-        int min = valuedistance.get(0);
-        int max = valuedistance.get(0);
-        int minIndex = 1, maxIndex =0;
-        for (int x = 1 ; x<valuedistance.size();x++){
-            if (valuedistance.get(x)<min){
-                min = valuedistance.get(x);
-                minIndex = x+1;
+            }
+            int min = valuedistance.get(0);
+            int max = valuedistance.get(0);
+            int minIndex = 1, maxIndex =0;
+            for (int x = 1 ; x<valuedistance.size();x++){
+                if (valuedistance.get(x)<min){
+                    min = valuedistance.get(x);
+                    minIndex = x+1;
+                }
+
             }
 
+            tajwid = dataModel.selectAllTajwidByID(minIndex);
+            hukum = dataModel.selectHukumByID(tajwid.getHukum());
+            tvTajwid.setText("Hukum Bacaannya: "+hukum.getHukum());
+//        tvKey.setText(stringBuilder);
+//        tvPattern.setText(Integer.toString(indexN));
+            tvPattern.setText(newPattern);
+            tvKey.setText(tajwid.getTranskripsi());
+            tvHuruf.setText("Nun mati/Tanwin bertemu dengan huruf "+tajwid.getHuruf());
         }
 
-        tajwid = dataModel.selectAllTajwidByID(minIndex);
-        hukum = dataModel.selectHukumByID(tajwid.getHukum());
 
-        tvTajwid.setText(hukum.getHukum());
-//        tvKey.setText(stringBuilder);
-//        tvPattern.setText(Integer.toString(minIndex));
-        tvPattern.setText(pattern2);
-        tvKey.setText(tajwid.getTranskripsi());
-        tvHuruf.setText("Nun mati/Tanwin bertemu dengan huruf "+tajwid.getHuruf());
         btnReload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,6 +95,13 @@ public class ResultTajwidActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 ResultTajwidActivity.this.finish();
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

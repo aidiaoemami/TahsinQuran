@@ -13,6 +13,7 @@ import android.speech.RecognizerIntent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import java.util.Random;
 public class TahsinActivity extends AppCompatActivity {
 
     ImageButton voiceBtn;
+    ImageView btnBack;
     TextView textlafadz;
     ArrayList<String> dataSurat;
     SQLiteOpenHelper helper;
@@ -40,6 +42,7 @@ public class TahsinActivity extends AppCompatActivity {
 
         voiceBtn = findViewById(R.id.voiceBtn);
         textlafadz = findViewById(R.id.lafadz);
+        btnBack = findViewById(R.id.btnBack);
 
         helper = new DataHelper(getApplicationContext());
         db = helper.getReadableDatabase();
@@ -73,6 +76,12 @@ public class TahsinActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 speak(textLafadzh);
+            }
+        });
+        btnBack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
     }

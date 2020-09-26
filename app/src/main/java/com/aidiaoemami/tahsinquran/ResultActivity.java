@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ public class ResultActivity extends AppCompatActivity {
     TextView textView, lafadz;
     TextView tVPattern, tVkey, tvTajwid;
     Button reloadBtn;
+    ImageView btnClose, playAudio;
+    MediaPlayer mySong;
     SQLiteOpenHelper helper;
 //    SQLiteDatabase db;
     DataHelper db;
@@ -47,66 +52,43 @@ public class ResultActivity extends AppCompatActivity {
         tVPattern = findViewById(R.id.pattern);
         tVkey = findViewById(R.id.key);
         tvTajwid = findViewById(R.id.tvTajwid);
+        btnClose = findViewById(R.id.btnClose);
+        playAudio = findViewById(R.id.playAudio);
+//        mySong = MediaPlayer.create(ResultActivity.this, R.raw.a);
 
+        playAudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mySong.start();
+            }
+        });
 
         Intent i = getIntent();
         teks = i.getStringArrayListExtra("text");
-//        String pattern = teks.get(0).toLowerCase().replaceAll("\\s+", "");
         String pattern = teks.get(0).toLowerCase().replaceAll("[^a-z]", "");
-        String patternTajwid;
-        char n = 'n';
-        char m;
-        int indexN=0;
-        int length = pattern.length();
-        for (int x = 0; x<length;x++){
-            m = pattern.charAt(x);
-            if (m == n && x>0){
-                indexN = x-1;
-                break;
-            }
-        }
-        if (length-indexN > 4)
-            patternTajwid = pattern.substring(indexN, length-3);
-        else
-            patternTajwid = pattern.substring(indexN, length);
-
-        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
-        int idtahsin = sharedPreferences.getInt("id_tahsin",0);
-
         db = new DataHelper(this);
         helper = new DataHelper(getApplicationContext());
         dataModel = new DataModel(helper.getReadableDatabase());
 
+        SharedPreferences sharedPreferences = getSharedPreferences("myKey", MODE_PRIVATE);
+        int idtahsin = sharedPreferences.getInt("id_tahsin",0);
+        String a = "a";
         tahsin = dataModel.selectTahsinByID(idtahsin);
+        int resId = getResources().getIdentifier(a, "raw", getPackageName());
+//        int resId = getResources().getIdentifier(Integer.toString(tahsin.getID()), "raw", getPackageName());
+        mySong = MediaPlayer.create(ResultActivity.this, resId);
         lafadz.setText(tahsin.getLafadz());
         tVPattern.setText(pattern);
         tVkey.setText(tahsin.getTranskripsi());
 
-        Cursor cursor = db.allDataTajwid();
 
-        if (cursor.getCount()==0){
-            textView.setText("null");
-        }
+        String source = tahsin.getTransliterasi();
+        String newPattern = stemming(source);
 
-//        while (cursor.moveToNext()){
-//            key.add(cursor.getString(2));
-//            valuedistance.add(distance(tahsin.getTransliterasi(),key.get(cursor.getPosition())));
-////            stringBuilder.append("jarak : "+valuedistance.get(cursor.getPosition())+" Key : "
-////                    +key.get(cursor.getPosition())+"\n");
-////                stringBuilder.append(cursor.getCount());
-//        }
-//
-//        int min = valuedistance.get(0);
-//        int max = valuedistance.get(0);
-//        int minIndex = 1, maxIndex =0;
-//        for (int x = 1 ; x<valuedistance.size();x++){
-//            if (valuedistance.get(x)<min){
-//                min = valuedistance.get(x);
-//                minIndex = x+1;
-//            }
-//        }
-//        tajwid = dataModel.selectAllTajwidByID(minIndex);
-//        hukum = dataModel.selectHukumByID(tajwid.getHukum());
+
+
+        tajwid = dataModel.selectAllTajwidByID(searchTajwid(newPattern));
+        hukum = dataModel.selectHukumByID(tajwid.getHukum());
 
         int distance = distance(pattern, tahsin.getTranskripsi());
         String result;
@@ -116,13 +98,7 @@ public class ResultActivity extends AppCompatActivity {
             result = "Terdapat Kesalahan pada Bacaan";
 
         textView.setText(result);
-        tvTajwid.setText(patternTajwid);
-
-
-
-
-
-        reloadBtn.setText("Ulangi Tahsin");
+        tvTajwid.setText(hukum.getHukum());
 
 
         reloadBtn.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +108,13 @@ public class ResultActivity extends AppCompatActivity {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
                 ResultActivity.this.finish();
+            }
+        });
+
+        btnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
             }
         });
 
@@ -159,12 +142,41 @@ public class ResultActivity extends AppCompatActivity {
 //            }
 //        }
 
+    }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mySong.release();
+    }
 
+    public static String stemming(String pattern){
+        String patternTajwid;
+        char n = 'n';
+        char m;
+        int indexN=0, noWord=0;
+        int length = pattern.length();
+        for (int x = 0; x<length;x++){
+            m = pattern.charAt(x);
+            if (m == n && x>0 && x!=length-1){
+                indexN = x-1;
+                noWord = 1;
+                break;
+            }
+        }
+        if (noWord==0 && !pattern.contains("irro") && !pattern.contains("iwwa") && !pattern.contains("ll") )
+            patternTajwid = "x";
 
+        else if (noWord>0 && pattern.charAt(indexN+2)== 'a' || pattern.charAt(indexN+2)== 'i'|| pattern.charAt(indexN+2)== 'u' )
+            patternTajwid = pattern.substring(indexN, indexN+3);
 
-//
+        else if (length-indexN > 5 && indexN>=0 && noWord>0)
+            patternTajwid = pattern.substring(indexN, indexN+5);
 
+        else
+            patternTajwid = pattern.substring(indexN, length);
+
+        return patternTajwid;
     }
 
     public static int distance(String pattern, String key){
@@ -193,61 +205,27 @@ public class ResultActivity extends AppCompatActivity {
         return dist[pattern.length()][key.length()];
     }
 
-    public static int BoyerMoore(String T, String P)
-    {
-        int i = P.length() -1;
-        int j = P.length() -1;
-        do
-        {
-            if (P.charAt(j) == T.charAt(i))
-            {
-                if (j == 0)
-                {
-                    return i; // a match!
-                }
-                else
-                {
-                    i--;
-                    j--;
-                }
-            }
-            else
-            {
-                i = i + P.length() - min(j, 1+last(T.charAt(i), P));
-                j = P.length()-1;
-            }
-        } while(i <= T.length()-1);
+    public int searchTajwid(String patternTajwid){
+        ArrayList<String> key = new ArrayList<>();
+        ArrayList<Integer> valuedistance = new ArrayList<>();
+        Cursor cursor = db.allDataTajwid();
 
-        return -1;
-    }
+        while (cursor.moveToNext()){
+            key.add(cursor.getString(2));
+            valuedistance.add(distance(patternTajwid,key.get(cursor.getPosition())));
+//            stringBuilder.append("jarak : "+valuedistance.get(cursor.getPosition())+" Key : "
+//                    +key.get(cursor.getPosition())+"\n");
+//                stringBuilder.append(cursor.getCount());
+        }
 
-    //----------------------------------------------------------------
-    // Returns index of last occurrence of character in pattern.
-    //----------------------------------------------------------------
-    public static int last(char c, String P)
-    {
-        for (int i=P.length()-1; i>=0; i--)
-        {
-            if (P.charAt(i) == c)
-            {
-                return i;
+        int min = valuedistance.get(0);
+        int minIndex = 1;
+        for (int x = 1 ; x<valuedistance.size();x++){
+            if (valuedistance.get(x)<min){
+                min = valuedistance.get(x);
+                minIndex = x+1;
             }
         }
-        return -1;
+        return minIndex;
     }
-
-
-    //----------------------------------------------------------------
-    // Returns the minimum of two integers.
-    //----------------------------------------------------------------
-    public static int min(int a, int b)
-    {
-        if (a < b)
-            return a;
-        else if (b < a)
-            return b;
-        else
-            return a;
-    }
-
 }

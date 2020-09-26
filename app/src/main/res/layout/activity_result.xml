@@ -8,6 +8,16 @@
     android:orientation="vertical"
     android:background="@color/colorPrimaryDark">
 
+
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/close" />
+
     <TextView
         android:id="@+id/textTv"
         android:layout_width="wrap_content"
@@ -16,7 +26,7 @@
         android:fontFamily="sans-serif-medium"
         android:textColor="@color/white"
         android:textSize="25sp"
-        android:layout_marginTop="75dp"
+        android:layout_marginTop="65dp"
         android:layout_marginLeft="20dp"
         />
     <TextView
@@ -81,17 +91,60 @@
             android:textSize="16sp"
             />
 
-        <TextView
-            android:id="@+id/key"
+        <LinearLayout
+            android:layout_weight="2"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="text"
-            android:padding="10dp"
-            android:textSize="16sp"
-            android:background="@color/bluelight"
-            android:textColor="@color/colorPrimary"
-            android:textAlignment="center"
-            />
+            android:background="@color/bluelight">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:ignore="Suspicious0dp">
+
+                <TextView
+                    android:id="@+id/key"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="text"
+                    android:padding="10dp"
+                    android:textSize="16sp"
+                    android:background="@color/bluelight"
+                    android:textColor="@color/colorPrimary"
+                    android:textAlignment="center"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                tools:ignore="Suspicious0dp"
+                android:background="@color/bluelight">
+                    <ImageView
+                        android:id="@+id/playAudio"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:src="@drawable/play"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Putar Audio"
+                        android:textSize="10sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_marginBottom="2dp"
+                        />
+            </LinearLayout>
+        </LinearLayout>
+
+
+
+
 
         <TextView
             android:layout_marginTop="10dp"
