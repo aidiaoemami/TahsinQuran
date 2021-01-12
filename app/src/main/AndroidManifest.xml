@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.aidiaoemami.tahsinquran">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_quran_recitation"
@@ -9,21 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TentangActivity"
+        <activity android:name=".DetailMateriActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".TentangActivity"
             android:label="Tentang"
-            />
-        <activity android:name=".MateriActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".TajwidActivity"
+        <activity
+            android:name=".MateriActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TajwidActivity"
             android:label="Tajwid"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".TahsinActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:label="Tahsin"/>
-        <activity android:name=".ResultTajwidActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".ResultActivity"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TahsinActivity"
+            android:label="Tahsin"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResultTajwidActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ResultActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SplashscreenActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar">

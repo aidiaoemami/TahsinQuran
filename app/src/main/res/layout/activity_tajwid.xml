@@ -38,19 +38,20 @@
                 android:layout_height="wrap_content"
                 android:text="Tajwid"
                 android:textColor="@color/white"
-                android:textSize="30sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="20dp"
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Mengetahui Hukum Bacaan"
+                android:text="Mengenali Hukum Bacaan\nNun Mati"
                 android:textColor="#fff"
                 android:textSize="15sp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
                 />
 
         </LinearLayout>
@@ -89,8 +90,8 @@
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
             android:textColor="#fff"
-            android:text="Tekan dan bacakan\nsalah satu contoh\nhukum nun mati"
-            android:textSize="24sp"/>
+            android:text="Tekan dan bacakan\nsalah satu contoh\nbacaan hukum\nnun mati"
+            android:textSize="20sp"/>
 
 
 

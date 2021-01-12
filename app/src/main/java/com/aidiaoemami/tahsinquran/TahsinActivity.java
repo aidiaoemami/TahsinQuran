@@ -10,8 +10,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,8 +27,10 @@ import java.util.Random;
 
 public class TahsinActivity extends AppCompatActivity {
 
-    ImageButton voiceBtn;
+    Button btnSearch;
+    EditText et_pattern;
     ImageView btnBack;
+    String pattern;
     TextView textlafadz;
     ArrayList<String> dataSurat;
     SQLiteOpenHelper helper;
@@ -40,8 +46,9 @@ public class TahsinActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tahsin);
 
-        voiceBtn = findViewById(R.id.voiceBtn);
-        textlafadz = findViewById(R.id.lafadz);
+        btnSearch = findViewById(R.id.btn_search);
+        et_pattern = findViewById(R.id.et_pattern);
+//        textlafadz = findViewById(R.id.lafadz);
         btnBack = findViewById(R.id.btnBack);
 
         helper = new DataHelper(getApplicationContext());
@@ -65,33 +72,45 @@ public class TahsinActivity extends AppCompatActivity {
         lafadzh = dataModel.selectTahsinByID(id);
         final String textLafadzh = lafadzh.getLafadz();
         int id_tahsin = lafadzh.getId();
-        final String idtahsin = String.valueOf(id_tahsin);
-        textlafadz.setText(textLafadzh);
+//        textlafadz.setText(textLafadzh);
         SharedPreferences sharedPref = getSharedPreferences("myKey", MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("id_tahsin", id_tahsin);
         editor.apply();
 
-        voiceBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                speak(textLafadzh);
-            }
-        });
+
+//        voiceBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                speak();
+//            }
+//        });
         btnBack.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 onBackPressed();
             }
         });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+                                         @Override
+                                         public void onClick(View v) {
+                                            Intent intent = new Intent (TahsinActivity.this, ResultActivity.class);
+                                            intent.putExtra("pattern", et_pattern.getText().toString());
+                                             Log.d("pattern", et_pattern.getText().toString());
+                                            startActivity(intent);
+                                         }
+                                     }
+
+        );
     }
 
-    private void speak(String textlafadz) {
+    private void speak() {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "id-ID");
 //        i.putExtra(RecognizerIntent.EXTRA_PROMPT, textlafadz);
-//        i.putExtra(RecognizerIntent.EXTRA_PROMPT, value);
+        i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Bacakan sesuai lafadz");
 
         try {
             startActivityForResult(i, REQUEST_CODE_SPEECH_INPUT);

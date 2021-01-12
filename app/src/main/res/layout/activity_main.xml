@@ -25,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@drawable/bg_menu"
+        android:background="@drawable/bg_primarydark"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -57,18 +57,18 @@
                     <ImageView
                         android:layout_marginTop="12dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/mic3"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:src="@drawable/keyboard"
                         />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
-                        android:text="Tahsin"
+                        android:text="Tajwid"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="26dp"
+                        android:layout_marginTop="46dp"
                         android:textColor="#fff"
                         />
 
@@ -95,8 +95,8 @@
                     <ImageView
                         android:layout_marginTop="12dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@drawable/mic3"
                         />
 
@@ -106,7 +106,7 @@
                         android:textSize="22sp"
                         android:text="Tajwid"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="26dp"
+                        android:layout_marginTop="46dp"
                         android:textColor="#fff"
                         />
 
@@ -146,8 +146,8 @@
                     <ImageView
                         android:layout_marginTop="12dp"
                         android:layout_marginLeft="12dp"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:src="@drawable/listwhite"
                         />
 
@@ -157,7 +157,7 @@
                         android:textSize="22sp"
                         android:text="Materi"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="26dp"
+                        android:layout_marginTop="46dp"
                         android:textColor="#fff"
                         />
 
@@ -182,8 +182,8 @@
                     android:layout_height="150dp">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
                         android:layout_marginLeft="12dp"
                         android:layout_marginTop="12dp"
                         android:src="@drawable/about" />
@@ -194,7 +194,7 @@
                         android:textSize="22sp"
                         android:text="Tentang"
                         android:layout_marginLeft="12dp"
-                        android:layout_marginTop="26dp"
+                        android:layout_marginTop="46dp"
                         android:textColor="#fff"
                         />
 

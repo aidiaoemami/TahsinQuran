@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Tahsin Quran</string>
+    <string name="app_name">Tajwid Quran</string>
+    <string name="about">
+        Aplikasi ini dibuat sebagai salah satu syarat lulus Strata Satu (S1) dan merupakan sebuah aplikasi yang dapat digunakan untuk mengenali hukum bacaan nun mati atau tanwin yang terdapat pada suatu kalimah Al-Quran yang diinputkan,
+        Aplikasi ini juga berguna bagi pengguna untuk mengetahui hukum nun mati dan tanwin.
+    </string>
+    <string name="contact">
+        Nama : Aidia Oemami\nNIM  : 1167050013\nJurusan : Teknik Informatika\nUIN Sunan Gunung Djati\nEmail : aidiaoemami@gmail.com\nDosen Pembimbing:\n1. Mohamad Irfan, ST., M.Kom\n2. Dr. Arief Fatchul Huda S.Si., M.Kom
+    </string>
 </resources>

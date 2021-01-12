@@ -43,7 +43,7 @@ public class TajwidActivity extends AppCompatActivity {
     private void speak() {
         Intent i = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         i.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
+        i.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ar-SA");
         i.putExtra(RecognizerIntent.EXTRA_PROMPT, "Bacakan bacaan yang ingin anda tahu hukumnya");
 //        i.putExtra(RecognizerIntent.EXTRA_PROMPT, value);
 

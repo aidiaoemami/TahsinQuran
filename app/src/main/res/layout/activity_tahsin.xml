@@ -38,22 +38,23 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Tahsin"
-                android:textColor="@color/white"
-                android:textSize="30sp"
-                android:textStyle="bold"
                 android:layout_marginLeft="20dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="20dp"
+                android:text="Tajwid"
+                android:textColor="@color/white"
+                android:textSize="25sp"
+                android:textStyle="bold"
 
                 />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Mengoreksi Bacaan "
+                android:text="Mengenali Hukum Bacaan\nNun Mati atau Tanwin"
                 android:textColor="#fff"
                 android:textSize="15sp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginBottom="10dp"
                 />
 
         </LinearLayout>
@@ -76,37 +77,55 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/lafadz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Lafadz"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textAlignment="center"
-            />
-
-        <ImageButton
-            android:id="@+id/voiceBtn"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:background="@null"
-            android:src="@drawable/mic3"
-            android:scaleType="fitCenter"
-            android:layout_marginTop="200dp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/lafadz"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="Lafadz"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="30sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textAlignment="center"-->
+<!--            />-->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/voiceBtn"
             android:layout_margin="10dp"
             android:textColor="@color/white"
             android:layout_marginBottom="10dp"
             android:textAlignment="center"
-            android:text="Tekan dan Bacakan \nsesuai teks diatas"
-            android:textSize="24sp"
+            android:text="Masukkan teks bahasa arab lengkap dengan harakat yang ingin\nanda ketahui hukum bacaannya\n\nmisal : مِنْ عَذَابٍ"
+            android:textSize="18sp"
             />
+
+        <EditText
+            android:id="@+id/et_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="120dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentBottom="true">
+
+            <Button
+                android:id="@+id/btn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="Kenali Hukum"
+                android:textStyle="bold"
+                android:background="@drawable/bg_primary"
+                android:layout_weight="1">
+            </Button>
+
+        </LinearLayout>
+
+
 
 
 
